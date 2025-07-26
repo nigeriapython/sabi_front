@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Sabiexports.ng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf7f0',
+                            100: '#e8e0cd',
+                            200: '#d5c8a9',
+                            300: '#c2b086',
+                            400: '#af9962',
+                            500: '#967f48',
+                            600: '#756338',
+                            700: '#544728',
+                            800: '#332b18',
+                            900: '#120f08',
+                        },
+                        secondary: {
+                            50: '#f3f5f0',
+                            100: '#d8dfd1',
+                            200: '#bdc9b2',
+                            300: '#a2b393',
+                            400: '#879d74',
+                            500: '#6d845a',
+                            600: '#556646',
+                            700: '#3d4832',
+                            800: '#252a1e',
+                            900: '#0d0f0a',
+                        },
+                        accent: {
+                            50: '#fef9e6',
+                            100: '#fbedb9',
+                            200: '#f8e18d',
+                            300: '#f5d560',
+                            400: '#f2c933',
+                            500: '#d9b01a',
+                            600: '#a88914',
+                            700: '#77620e',
+                            800: '#453b08',
+                            900: '#141402',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    transitionProperty: {
+                        'width': 'width',
+                        'height': 'height',
+                        'spacing': 'margin, padding',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 80px;
+            --header-height: 64px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Sidebar transitions */
+        .sidebar {
+            width: var(--sidebar-width);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+        
+        .sidebar.collapsed .sidebar-item-text,
+        .sidebar.collapsed .sidebar-dropdown-toggle span,
+        .sidebar.collapsed .sidebar-brand-text,
+        .sidebar.collapsed .sidebar-divider span {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .sidebar.collapsed .sidebar-item {
+            justify-content: center;
+        }
+        
+        .sidebar.collapsed .sidebar-dropdown-menu {
+            display: none !important;
+        }
+        
+        .sidebar.collapsed .sidebar-brand {
+            justify-content: center;
+        }
+        
+        .sidebar.collapsed .sidebar-divider {
+            justify-content: center;
+        }
+        
+        /* Main content area */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar.collapsed ~ .main-content {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+        
+        /* Active menu item */
+        .sidebar-item.active {
+            background-color: rgba(242, 201, 51, 0.1);
+            border-left: 3px solid #f2c933;
+        }
+        
+        .sidebar-item.active .sidebar-item-icon {
+            color: #f2c933;
+        }
+        
+        /* Dropdown menu */
+        .sidebar-dropdown-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .sidebar-dropdown.open .sidebar-dropdown-menu {
+            max-height: 500px;
+        }
+        
+        /* Mobile sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 50;
+                height: 100vh;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar.collapsed {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.collapsed.open {
+                transform: translateX(0);
+                width: var(--sidebar-width);
+            }
+            
+            .sidebar.collapsed.open .sidebar-item-text,
+            .sidebar.collapsed.open .sidebar-dropdown-toggle span,
+            .sidebar.collapsed.open .sidebar-brand-text,
+            .sidebar.collapsed.open .sidebar-divider span {
+                opacity: 1;
+                width: auto;
+                height: auto;
+                display: inline;
+            }
+            
+            .sidebar.collapsed.open .sidebar-item {
+                justify-content: flex-start;
+            }
+            
+            .sidebar.collapsed.open .sidebar-dropdown.open .sidebar-dropdown-menu {
+                display: block !important;
+            }
+            
+            .sidebar.collapsed.open .sidebar-brand {
+                justify-content: space-between;
+            }
+            
+            .sidebar.collapsed.open .sidebar-divider {
+                justify-content: flex-start;
+            }
+        }
+        
+        /* Table styles */
+        .data-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .data-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: #f9fafb;
+        }
+        
+        .data-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+        
+        /* Card hover effect */
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Animation for notifications */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification {
+            animation: slideIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Sidebar Backdrop (mobile only) -->
+    <div id="sidebarBackdrop" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 h-screen bg-white shadow-md flex flex-col z-30">
+        <!-- Sidebar Brand -->
+        <div class="sidebar-brand flex items-center justify-between p-4 border-b">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-md bg-accent-500 flex items-center justify-center">
+                    <i class="fas fa-leaf text-white"></i>
+                </div>
+                <span class="sidebar-brand-text ml-3 font-bold text-gray-800">Sabieexports</span>
+            </div>
+            <button id="sidebarToggle" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-angle-left"></i>
+            </button>
+        </div>
+        
+        <!-- Sidebar Content -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar py-2">
+            <!-- User Profile -->
+            <div class="px-4 py-3 flex items-center border-b">
+                <div class="relative">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="w-10 h-10 rounded-full object-cover">
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+                </div>
+                <div class="ml-3 sidebar-item-text">
+                    <p class="text-sm font-medium text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Super Admin</p>
+                </div>
+            </div>
+            
+            <!-- Main Menu -->
+            <ul class="px-2 py-4 space-y-1">
+                <li>
+                    <a href="#" class="sidebar-item flex items-center px-3 py-2 text-sm font-medium rounded-md active">
+                        <i class="sidebar-item-icon fas fa-tachometer-alt text-gray-500 mr-3"></i>
+                        <span class="sidebar-item-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                <!-- Products Dropdown -->
+                <li class="sidebar-dropdown">
+                    <button class="sidebar-dropdown-toggle w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md">
+                        <div class="flex items-center">
+                            <i class="fas fa-box-open text-gray-500 mr-3"></i>
+                            <span class="sidebar-item-text">Products</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"></i>
+                    </button>
+                    <ul class="sidebar-dropdown-menu pl-9 mt-1 space-y-1">
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">All Products</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Add New Product</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Categories</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Attributes</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Inventory</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Orders Dropdown -->
+                <li class="sidebar-dropdown">
+                    <button class="sidebar-dropdown-toggle w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md">
+                        <div class="flex items-center">
+                            <i class="fas fa-shopping-cart text-gray-500 mr-3"></i>
+                            <span class="sidebar-item-text">Orders</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"></i>
+                    </button>
+                    <ul class="sidebar-dropdown-menu pl-9 mt-1 space-y-1">
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">All Orders</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Processing</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Completed</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Cancelled</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Returns</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Users Dropdown -->
+                <li class="sidebar-dropdown">
+                    <button class="sidebar-dropdown-toggle w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md">
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-gray-500 mr-3"></i>
+                            <span class="sidebar-item-text">Users</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"></i>
+                    </button>
+                    <ul class="sidebar-dropdown-menu pl-9 mt-1 space-y-1">
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">All Users</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Sellers</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Buyers</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Roles & Permissions</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Reports -->
+                <li>
+                    <a href="#" class="sidebar-item flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="sidebar-item-icon fas fa-chart-bar text-gray-500 mr-3"></i>
+                        <span class="sidebar-item-text">Reports</span>
+                    </a>
+                </li>
+                
+                <!-- Divider -->
+                <li class="sidebar-divider px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex items-center">
+                    <span class="sidebar-item-text">Management</span>
+                </li>
+                
+                <!-- Settings Dropdown -->
+                <li class="sidebar-dropdown">
+                    <button class="sidebar-dropdown-toggle w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md">
+                        <div class="flex items-center">
+                            <i class="fas fa-cog text-gray-500 mr-3"></i>
+                            <span class="sidebar-item-text">Settings</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"></i>
+                    </button>
+                    <ul class="sidebar-dropdown-menu pl-9 mt-1 space-y-1">
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">General</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Payment Methods</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Shipping</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Taxes</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">Notifications</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Content Management -->
+                <li>
+                    <a href="#" class="sidebar-item flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="sidebar-item-icon fas fa-file-alt text-gray-500 mr-3"></i>
+                        <span class="sidebar-item-text">Content</span>
+                    </a>
+                </li>
+                
+                <!-- Help Center -->
+                <li>
+                    <a href="#" class="sidebar-item flex items-center px-3 py-2 text-sm font-medium rounded-md">
+                        <i class="sidebar-item-icon fas fa-question-circle text-gray-500 mr-3"></i>
+                        <span class="sidebar-item-text">Help Center</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t">
+            <button class="w-full flex items-center justify-center px-3 py-2 bg-accent-50 text-accent-600 text-sm font-medium rounded-md hover:bg-accent-100">
+                <i class="fas fa-sign-out-alt mr-2"></i>
+                <span class="sidebar-item-text">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm z-20">
+            <div class="flex items-center justify-between px-6 py-4">
+                <!-- Mobile menu button -->
+                <button id="mobileMenuToggle" class="lg:hidden text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center ml-4 w-full max-w-md">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Right Side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Notifications -->
+                    <div class="relative">
+                        <button id="notificationsButton" class="p-2 text-gray-500 hover:text-gray-700 focus:outline-none relative">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div id="notificationsDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-50">
+                            <div class="px-4 py-3 border-b">
+                                <p class="text-sm font-medium text-gray-800">Notifications</p>
+                            </div>
+                            <div class="overflow-y-auto max-h-96 custom-scrollbar">
+                                <a href="#" class="block px-4 py-3 hover:bg-gray-50 border-b">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-accent-100 p-2 rounded-full">
+                                            <i class="fas fa-shopping-cart text-accent-600"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-800">New order received</p>
+                                            <p class="text-xs text-gray-500">Order #12345 from John Doe</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="block px-4 py-3 hover:bg-gray-50 border-b">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-user text-blue-600"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-800">New seller registered</p>
+                                            <p class="text-xs text-gray-500">Green Farms Ltd wants to sell</p>
+                                            <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="block px-4 py-3 hover:bg-gray-50">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-green-100 p-2 rounded-full">
+                                            <i class="fas fa-check-circle text-green-600"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-800">Payment received</p>
+                                            <p class="text-xs text-gray-500">$2,800 for Order #12344</p>
+                                            <p class="text-xs text-gray-400 mt-1">3 hours ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="px-4 py-2 border-t">
+                                <a href="#" class="block text-center text-sm font-medium text-accent-600 hover:text-accent-700">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Messages -->
+                    <div class="relative">
+                        <button id="messagesButton" class="p-2 text-gray-500 hover:text-gray-700 focus:outline-none relative">
+                            <i class="fas fa-envelope text-xl"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
+                        </button>
+                        <div id="messagesDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-50">
+                            <div class="px-4 py-3 border-b">
+                                <p class="text-sm font-medium text-gray-800">Messages</p>
+                            </div>
+                            <div class="overflow-y-auto max-h-96 custom-scrollbar">
+                                <a href="#" class="block px-4 py-3 hover:bg-gray-50 border-b">
+                                    <div class="flex items-start">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-10 h-10 rounded-full object-cover">
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-800">Sarah Johnson</p>
+                                            <p class="text-xs text-gray-500 truncate">Hello, I have a question about my order...</p>
+                                            <p class="text-xs text-gray-400 mt-1">30 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="block px-4 py-3 hover:bg-gray-50 border-b">
+                                    <div class="flex items-start">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-10 h-10 rounded-full object-cover">
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-800">Michael Brown</p>
+                                            <p class="text-xs text-gray-500 truncate">Can we negotiate the price for bulk order...</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="block px-4 py-3 hover:bg-gray-50">
+                                    <div class="flex items-start">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-10 h-10 rounded-full object-cover">
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-800">Amina Yusuf</p>
+                                            <p class="text-xs text-gray-500 truncate">Thank you for the quick delivery!</p>
+                                            <p class="text-xs text-gray-400 mt-1">5 hours ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="px-4 py-2 border-t">
+                                <a href="#" class="block text-center text-sm font-medium text-accent-600 hover:text-accent-700">View all messages</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Menu -->
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center focus:outline-none">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="w-8 h-8 rounded-full object-cover">
+                            <span class="hidden md:inline ml-2 text-sm font-medium text-gray-700">Admin</span>
+                            <i class="hidden md:inline fas fa-chevron-down ml-1 text-xs text-gray-500"></i>
+                        </button>
+                        <div id="userMenuDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Activity Log</a>
+                            <div class="border-t border-gray-200"></div>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <main class="flex-1 p-6">
+            <!-- Page Header -->
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Dashboard Overview</h1>
+                    <p class="text-gray-600">Welcome back, Admin! Here's what's happening with your business today.</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <button class="px-4 py-2 bg-accent-500 text-white rounded-md hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2">
+                        <i class="fas fa-plus mr-2"></i> New Export
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="dashboard-card bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Total Revenue</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">₦12,845,300</p>
+                            <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> 12.5% from last month</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-green-50 text-green-600">
+                            <i class="fas fa-wallet text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">New Orders</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">48</p>
+                            <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> 3.2% from last month</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-blue-50 text-blue-600">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Active Products</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">1,248</p>
+                            <p class="text-xs text-red-500 mt-1"><i class="fas fa-arrow-down mr-1"></i> 1.1% from last month</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-purple-50 text-purple-600">
+                            <i class="fas fa-box-open text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">New Customers</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">86</p>
+                            <p class="text-xs text-green-500 mt-1"><i class="fas fa-arrow-up mr-1"></i> 8.7% from last month</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-orange-50 text-orange-600">
+                            <i class="fas fa-users text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Revenue Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-medium text-gray-800">Revenue Overview</h2>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-xs bg-accent-100 text-accent-700 rounded-md">Monthly</button>
+                            <button class="px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded-md">Yearly</button>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <!-- Chart placeholder - would be replaced with actual chart library -->
+                        <div class="w-full h-full bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                            <i class="fas fa-chart-line text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Top Products -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h2 class="text-lg font-medium text-gray-800 mb-4">Top Selling Products</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-medium text-gray-800">Premium Cocoa Beans</p>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="ml-3 text-right">
+                                <p class="text-sm font-medium text-gray-800">₦4,250,000</p>
+                                <p class="text-xs text-gray-500">85 orders</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-medium text-gray-800">Organic Sesame Seeds</p>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                                    <div class="bg-blue-500 h-1.5 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div class="ml-3 text-right">
+                                <p class="text-sm font-medium text-gray-800">₦3,120,000</p>
+                                <p class="text-xs text-gray-500">62 orders</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-medium text-gray-800">Raw Shea Butter</p>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                                    <div class="bg-purple-500 h-1.5 rounded-full" style="width: 58%"></div>
+                                </div>
+                            </div>
+                            <div class="ml-3 text-right">
+                                <p class="text-sm font-medium text-gray-800">₦2,850,000</p>
+                                <p class="text-xs text-gray-500">47 orders</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-medium text-gray-800">Raw Cashew Nuts</p>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                                    <div class="bg-yellow-500 h-1.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div class="ml-3 text-right">
+                                <p class="text-sm font-medium text-gray-800">₦2,150,000</p>
+                                <p class="text-xs text-gray-500">38 orders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mb-6">
+                <div class="px-6 py-4 border-b flex items-center justify-between">
+                    <h2 class="text-lg font-medium text-gray-800">Recent Orders</h2>
+                    <a href="#" class="text-sm font-medium text-accent-600 hover:text-accent-700">View All</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 data-table">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">#SE-12458</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" class="h-10 w-10 rounded-full">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Sarah Johnson</div>
+                                            <div class="text-sm text-gray-500">sarah@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 15, 2023</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">₦1,250,000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-accent-600 hover:text-accent-900">View</a>
+                                </td>
+                            </tr>
+                            
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">#SE-12457</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" class="h-10 w-10 rounded-full">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Michael Brown</div>
+                                            <div class="text-sm text-gray-500">michael@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 14, 2023</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">₦2,800,000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Processing</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-accent-600 hover:text-accent-900">View</a>
+                                </td>
+                            </tr>
+                            
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">#SE-12456</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="" class="h-10 w-10 rounded-full">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Amina Yusuf</div>
+                                            <div class="text-sm text-gray-500">amina@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 13, 2023</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">₦950,000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-accent-600 hover:text-accent-900">View</a>
+                                </td>
+                            </tr>
+                            
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">#SE-12455</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="" class="h-10 w-10 rounded-full">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">David Wilson</div>
+                                            <div class="text-sm text-gray-500">david@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 12, 2023</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">₦3,500,000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-accent-600 hover:text-accent-900">View</a>
+                                </td>
+                            </tr>
+                            
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">#SE-12454</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="" class="h-10 w-10 rounded-full">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Jennifer Lee</div>
+                                            <div class="text-sm text-gray-500">jennifer@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 11, 2023</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">₦1,750,000</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Cancelled</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-accent-600 hover:text-accent-900">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Recent Activities -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                <div class="px-6 py-4 border-b flex items-center justify-between">
+                    <h2 class="text-lg font-medium text-gray-800">Recent Activities</h2>
+                    <a href="#" class="text-sm font-medium text-accent-600 hover:text-accent-700">View All</a>
+                </div>
+                <div class="divide-y divide-gray-200">
+                    <div class="px-6 py-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 p-2 rounded-full">
+                                <i class="fas fa-user-plus text-blue-600"></i>
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-gray-800">New seller registered</p>
+                                    <p class="text-xs text-gray-500">2 hours ago</p>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Green Farms Ltd has registered as a new seller on the platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="px-6 py-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 p-2 rounded-full">
+                                <i class="fas fa-check-circle text-green-600"></i>
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-gray-800">Order completed</p>
+                                    <p class="text-xs text-gray-500">4 hours ago</p>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Order #SE-12458 has been successfully delivered to the buyer.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="px-6 py-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-purple-100 p-2 rounded-full">
+                                <i class="fas fa-box-open text-purple-600"></i>
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-gray-800">New product added</p>
+                                    <p class="text-xs text-gray-500">6 hours ago</p>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Premium Cocoa Beans from Ondo State has been added to the marketplace.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="px-6 py-4 hover:bg-gray-50">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-yellow-100 p-2 rounded-full">
+                                <i class="fas fa-exclamation-triangle text-yellow-600"></i>
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium text-gray-800">Payment failed</p>
+                                    <p class="text-xs text-gray-500">8 hours ago</p>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Payment for Order #SE-12454 has failed. Please contact the buyer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t py-4 px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-gray-600">© 2023 Sabiexports.ng. All rights reserved.</p>
+                <div class="mt-2 md:mt-0 flex space-x-6">
+                    <a href="#" class="text-sm text-gray-600 hover:text-gray-800">Privacy Policy</a>
+                    <a href="#" class="text-sm text-gray-600 hover:text-gray-800">Terms of Service</a>
+                    <a href="#" class="text-sm text-gray-600 hover:text-gray-800">Help Center</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Notification Toast (example) -->
+    <div id="notificationToast" class="fixed bottom-4 right-4 z-50 hidden">
+        <div class="notification bg-white rounded-lg shadow-lg overflow-hidden w-80 border border-gray-200">
+            <div class="px-4 py-3 bg-green-100 flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                    <span class="text-sm font-medium text-green-800">Success</span>
+                </div>
+                <button onclick="document.getElementById('notificationToast').classList.add('hidden')" class="text-green-600 hover:text-green-800 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="px-4 py-3">
+                <p class="text-sm text-gray-700">New order has been received successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+        const notificationsButton = document.getElementById('notificationsButton');
+        const notificationsDropdown = document.getElementById('notificationsDropdown');
+        const messagesButton = document.getElementById('messagesButton');
+        const messagesDropdown = document.getElementById('messagesDropdown');
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userMenuDropdown = document.getElementById('userMenuDropdown');
+        const dropdowns = document.querySelectorAll('.sidebar-dropdown');
+
+        // Toggle sidebar collapse/expand
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+
+        // Toggle mobile sidebar
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            sidebarBackdrop.classList.remove('hidden');
+        });
+
+        // Close mobile sidebar when backdrop is clicked
+        sidebarBackdrop.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            sidebarBackdrop.classList.add('hidden');
+        });
+
+        // Toggle notifications dropdown
+        notificationsButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsDropdown.classList.toggle('hidden');
+            messagesDropdown.classList.add('hidden');
+            userMenuDropdown.classList.add('hidden');
+        });
+
+        // Toggle messages dropdown
+        messagesButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            messagesDropdown.classList.toggle('hidden');
+            notificationsDropdown.classList.add('hidden');
+            userMenuDropdown.classList.add('hidden');
+        });
+
+        // Toggle user menu dropdown
+        userMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userMenuDropdown.classList.toggle('hidden');
+            notificationsDropdown.classList.add('hidden');
+            messagesDropdown.classList.add('hidden');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            notificationsDropdown.classList.add('hidden');
+            messagesDropdown.classList.add('hidden');
+            userMenuDropdown.classList.add('hidden');
+        });
+
+        // Prevent dropdowns from closing when clicking inside them
+        [notificationsDropdown, messagesDropdown, userMenuDropdown].forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
+        // Handle sidebar dropdowns
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.sidebar-dropdown-toggle');
+            const menu = dropdown.querySelector('.sidebar-dropdown-menu');
+            const icon = dropdown.querySelector('.fa-chevron-down');
+
+            toggle.addEventListener('click', () => {
+                dropdown.classList.toggle('open');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Show notification toast (example)
+        setTimeout(() => {
+            document.getElementById('notificationToast').classList.remove('hidden');
+        }, 2000);
+
+        // Close notification toast after 5 seconds
+        setTimeout(() => {
+            document.getElementById('notificationToast').classList.add('hidden');
+        }, 7000);
+    </script>
+</body>
+</html>

@@ -136,88 +136,87 @@
 </head>
 <body class="font-sans bg-primary-50 text-gray-800 antialiased">
     <!-- Advanced Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <nav id="main-nav" class="sticky-nav bg-white shadow-sm">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="text-2xl font-bold text-primary-700 flex items-center">
+                        <a href="#" class="text-2xl font-bold text-primary-700 flex items-center smooth-transition hover:text-primary-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
                             Sabie<span class="text-accent-500">exports</span>.ng
-                        </span>
+                        </a>
                     </div>
-                    <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
-                        <!-- Current: "border-accent-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
+                    <div class="hidden md:ml-10 md:flex md:items-center md:space-x-6">
                         <div class="dropdown relative">
-                            <button class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <button class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium smooth-transition">
                                 Marketplace
-                                <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg class="ml-1 h-5 w-5 smooth-transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </button>
                             <div class="dropdown-menu absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
                                 <div class="py-1">
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Browse Products</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Sell Products</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Verified Suppliers</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Buyer Requests</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Browse Products</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Sell Products</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Verified Suppliers</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Buyer Requests</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="dropdown relative">
-                            <button class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <button class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium smooth-transition">
                                 Resources
-                                <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg class="ml-1 h-5 w-5 smooth-transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </button>
                             <div class="dropdown-menu absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
                                 <div class="py-1">
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Export Guides</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Documentation</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Trade Regulations</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Market Research</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Export Guides</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Documentation</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Trade Regulations</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Market Research</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="dropdown relative">
-                            <button class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            <button class="nav-link text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium smooth-transition">
                                 Intelligence
-                                <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg class="ml-1 h-5 w-5 smooth-transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </button>
                             <div class="dropdown-menu absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
                                 <div class="py-1">
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Market Trends</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Buyer Insights</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Regulatory Updates</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Price Analytics</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Market Trends</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Buyer Insights</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Regulatory Updates</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50 smooth-transition">Price Analytics</a>
                                 </div>
                             </div>
                         </div>
 
-                        <a href="#" class="nav-link text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium">Community</a>
-                        <a href="#" class="nav-link text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium">About</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium smooth-transition">Community</a>
+                        <a href="#" class="nav-link text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium smooth-transition">About</a>
                     </div>
                 </div>
                 <div class="hidden md:ml-6 md:flex md:items-center">
                     <div class="relative mx-4">
-                        <input type="text" placeholder="Search products..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-accent-500">
+                        <input type="text" placeholder="Search products..." class="search-input pl-10 pr-4 py-2 border border-gray-300 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent smooth-transition">
                         <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <button class="px-4 py-2 border border-primary-700 text-primary-700 rounded-md hover:bg-primary-700 hover:text-white transition duration-300">Login</button>
-                    <button class="ml-4 px-4 py-2 bg-accent-500 text-white rounded-md hover:bg-accent-600 transition duration-300">Register</button>
+                    <button class="btn-secondary px-4 py-2 border border-primary-700 text-primary-700 rounded-md hover:bg-primary-700 hover:text-white">Login</button>
+                    <button class="btn-primary ml-4 px-4 py-2 bg-accent-500 text-white rounded-md hover:bg-accent-600">Register</button>
                 </div>
                 <div class="-mr-2 flex items-center md:hidden">
                     <!-- Mobile menu button -->
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-500" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu()">
                         <span class="sr-only">Open main menu</span>
                         <!-- Icon when menu is closed -->
                         <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -235,20 +234,20 @@
         <!-- Mobile menu -->
         <div class="mobile-menu md:hidden bg-white shadow-lg" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <div class="px-3 pt-2">
-                    <input type="text" placeholder="Search products..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-accent-500">
+                <div class="px-3 pt-2 relative">
+                    <input type="text" placeholder="Search products..." class="search-input pl-10 pr-4 py-2 border border-gray-300 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent">
                     <svg class="absolute left-5 top-3.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
-                <a href="#" class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Marketplace</a>
-                <a href="#" class="text-gray-500 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Resources</a>
-                <a href="#" class="text-gray-500 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Intelligence</a>
-                <a href="#" class="text-gray-500 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Community</a>
-                <a href="#" class="text-gray-500 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#" class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50 smooth-transition">Marketplace</a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium smooth-transition">Resources</a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium smooth-transition">Intelligence</a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium smooth-transition">Community</a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium smooth-transition">About</a>
                 <div class="pt-4 border-t border-gray-200">
-                    <button class="w-full px-4 py-2 border border-primary-700 text-primary-700 rounded-md hover:bg-primary-700 hover:text-white transition duration-300 mb-2">Login</button>
-                    <button class="w-full px-4 py-2 bg-accent-500 text-white rounded-md hover:bg-accent-600 transition duration-300">Register</button>
+                    <button class="w-full btn-secondary px-4 py-2 border border-primary-700 text-primary-700 rounded-md hover:bg-primary-700 hover:text-white mb-2">Login</button>
+                    <button class="w-full btn-primary px-4 py-2 bg-accent-500 text-white rounded-md hover:bg-accent-600">Register</button>
                 </div>
             </div>
         </div>

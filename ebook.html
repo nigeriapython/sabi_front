@@ -470,71 +470,87 @@
     </script>
     
     <!-- About the Ebook -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="flex flex-col md:flex-row items-center gap-12" data-aos="fade-up">
-                <div class="md:w-1/2 order-2 md:order-1" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="relative">
-                        <img src="https://via.placeholder.com/600x800/f5f5f5/967f48?text=Ebook+Interior+Preview" alt="Inside look at Sabiexports ebook with export tips and diagrams" class="rounded-2xl shadow-2xl w-full h-auto hover-scale" loading="lazy">
-                        <div class="absolute bottom-4 left-4 bg-white p-4 rounded-xl shadow-md w-64">
-                            <p class="text-sm italic text-gray-600">"Turned my side hustle into ₦2M/month exports!"</p>
-                            <p class="font-medium text-primary-700 mt-2">- Chinedu E., Abuja</p>
+    <section id="about" class="py-12 md:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <!-- Image Column - Better mobile layout -->
+                <div class="lg:w-1/2 order-2 lg:order-1 mt-8 lg:mt-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="relative max-w-md mx-auto">
+                        <img src="https://via.placeholder.com/600x800/f5f5f5/967f48?text=Ebook+Preview" 
+                            alt="Export guide preview" 
+                            class="rounded-xl lg:rounded-2xl shadow-xl w-full h-auto"
+                            loading="lazy">
+                        
+                        <!-- Testimonial Badge - Better mobile positioning -->
+                        <div class="absolute bottom-3 left-3 lg:bottom-4 lg:left-4 bg-white p-3 lg:p-4 rounded-lg shadow-sm w-52 lg:w-64">
+                            <p class="text-xs lg:text-sm italic text-gray-600 mb-1 lg:mb-2">"Turned my side hustle into ₦2M/month!"</p>
+                            <p class="text-xs lg:text-sm font-medium text-primary-700">- Chinedu E., Abuja</p>
                         </div>
-                        <div class="absolute top-4 right-4 bg-white p-3 rounded-full shadow-md">
+                        
+                        <!-- Discount Badge - More mobile friendly -->
+                        <div class="absolute top-3 right-3 lg:top-4 lg:right-4">
                             <div class="relative">
-                                <div class="w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold">70%</div>
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold text-sm lg:text-base">
+                                    70%
+                                </div>
                                 <div class="pulse-ring absolute inset-0 border-2 border-accent-500 rounded-full"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="md:w-1/2 order-1 md:order-2" data-aos="fade-left">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6 font-serif">Why This Guide is Your Export Goldmine</h2>
-                    <p class="text-lg text-gray-600 mb-6">Nigeria's economy is tough – inflation, job scarcity, naira devaluation. But exporting lets you earn in dollars while helping Nigeria's economy. Many fail because they don't know where to start. This guide changes that.</p>
-                    <p class="text-lg text-gray-600 mb-8">Packed with insider secrets from 10+ years of exporting experience, it's your shortcut to success. No fluff – just actionable steps that work in 2024.</p>
+                <!-- Content Column - Better mobile typography -->
+                <div class="lg:w-1/2 order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 lg:mb-6 font-serif leading-tight">
+                        Your <span class="text-primary-600">Export Success</span> Blueprint
+                    </h2>
                     
-                    <div class="bg-primary-50 p-6 rounded-xl shadow-md border border-primary-200">
-                        <h3 class="text-xl font-bold text-primary-800 mb-4">Master These Export Superpowers:</h3>
-                        <ul class="space-y-3">
+                    <p class="text-base md:text-lg text-gray-600 mb-4 lg:mb-6">
+                        Nigeria's economy is challenging, but exporting lets you earn dollars while contributing to national growth. Most fail because they lack the right roadmap.
+                    </p>
+                    
+                    <p class="text-base md:text-lg text-gray-600 mb-6 lg:mb-8">
+                        This guide condenses 10+ years of export expertise into actionable steps that work in today's market. No theory - just proven strategies.
+                    </p>
+                    
+                    <!-- Benefits Box - More compact for mobile -->
+                    <div class="bg-primary-50 p-4 lg:p-6 rounded-lg lg:rounded-xl shadow-sm border border-primary-100 mb-6 lg:mb-8">
+                        <h3 class="text-lg lg:text-xl font-bold text-primary-800 mb-3 lg:mb-4">You'll Master:</h3>
+                        
+                        <ul class="space-y-2 lg:space-y-3">
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <svg class="w-4 h-4 lg:w-5 lg:h-5 text-primary-600 mt-0.5 lg:mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
-                                <span>Launch your export biz in 7 days flat</span>
+                                <span class="text-sm lg:text-base">Launch in 7 days with our step-by-step system</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <svg class="w-4 h-4 lg:w-5 lg:h-5 text-primary-600 mt-0.5 lg:mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
-                                <span>Navigate NEPC, customs & regs like a pro</span>
+                                <span class="text-sm lg:text-base">Navigate regulations & customs procedures</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <svg class="w-4 h-4 lg:w-5 lg:h-5 text-primary-600 mt-0.5 lg:mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
-                                <span>Attract buyers from Europe, Asia & USA</span>
+                                <span class="text-sm lg:text-base">Find buyers globally with our contact database</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <svg class="w-4 h-4 lg:w-5 lg:h-5 text-primary-600 mt-0.5 lg:mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
-                                <span>Handle shipping, payments & risks safely</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                                <span>Scale to 6-figures with automation</span>
+                                <span class="text-sm lg:text-base">Handle logistics & payments securely</span>
                             </li>
                         </ul>
                     </div>
                     
-                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                        <a href="#pricing" class="inline-flex items-center justify-center bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 cta-button">
-                            Get Instant Access – ₦9,999 Only
+                    <!-- CTA Buttons - Stacked on mobile -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="#pricing" class="flex-1 text-center bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 text-sm lg:text-base">
+                            Get Instant Access - ₦9,999
                         </a>
-                        <a href="#testimonials" class="inline-flex items-center justify-center bg-white hover:bg-gray-50 text-primary-600 font-bold py-3 px-8 rounded-full transition duration-300 border border-primary-200">
+                        <a href="#testimonials" class="flex-1 text-center bg-white hover:bg-gray-50 text-primary-600 font-bold py-3 px-6 rounded-full transition duration-300 border border-primary-200 text-sm lg:text-base">
                             See Success Stories
                         </a>
                     </div>

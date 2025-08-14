@@ -310,8 +310,8 @@
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-700 focus:outline-none transition-colors duration-200" id="mobile-menu-button" aria-label="Toggle menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <button class="md:hidden text-gray-700 focus:outline-none transition-colors duration-200" id="mobile-menu-button" aria-label="Toggle menu" aria-expanded="false">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
@@ -321,11 +321,11 @@
         <!-- Mobile Menu -->
         <div class="md:hidden hidden bg-white w-full py-3 px-4 shadow-lg transition-all duration-300 origin-top" id="mobile-menu">
             <div class="flex flex-col space-y-3">
-                <a href="#about" class="mobile-menu-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">About</a>
-                <a href="#benefits" class="mobile-menu-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Benefits</a>
-                <a href="#testimonials" class="mobile-menu-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Success Stories</a>
-                <a href="#bonuses" class="mobile-menu-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Bonuses</a>
-                <a href="#pricing" class="mobile-menu-link bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white px-6 py-3 rounded-full transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg mt-2">
+                <a href="#about" class="nav-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">About</a>
+                <a href="#benefits" class="nav-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Benefits</a>
+                <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Success Stories</a>
+                <a href="#bonuses" class="nav-link text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Bonuses</a>
+                <a href="#pricing" class="nav-link bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white px-6 py-3 rounded-full transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg mt-2">
                     Buy Now for ₦9,999
                 </a>
             </div>
@@ -333,43 +333,56 @@
     </header>
 
     <script>
-        // Mobile menu toggle functionality
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuLinks = document.querySelectorAll('.mobile-menu-link');
-        
-        function toggleMenu() {
-            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('block');
-            menuButton.setAttribute('aria-expanded', !isExpanded);
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const navLinks = document.querySelectorAll('.nav-link');
             
-            // Change icon
-            const icon = menuButton.querySelector('svg');
-            icon.innerHTML = isExpanded 
-                ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>'
-                : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-        }
-        
-        // Toggle menu when button clicked
-        menuButton.addEventListener('click', toggleMenu);
-        
-        // Close menu when a link is clicked
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            // Toggle menu function
+            function toggleMenu() {
+                const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenu.classList.toggle('hidden');
+                menuButton.setAttribute('aria-expanded', !isExpanded);
+                
+                // Change icon
+                if (isExpanded) {
+                    menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                } else {
+                    menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                }
+            }
+            
+            // Toggle menu when button is clicked
+            menuButton.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent event from bubbling to document
+                toggleMenu();
+            });
+            
+            // Close menu when a nav link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && e.target !== menuButton) {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                }
+            });
+            
+            // Close menu when scrolling on mobile
+            window.addEventListener('scroll', function() {
                 if (!mobileMenu.classList.contains('hidden')) {
                     toggleMenu();
                 }
             });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && e.target !== menuButton) {
-                if (!mobileMenu.classList.contains('hidden')) {
-                    toggleMenu();
-                }
-            }
         });
     </script>
         

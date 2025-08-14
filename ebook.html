@@ -283,75 +283,75 @@
         <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-md">!</span>
     </a>
     
-<!-- Header & Navigation -->
-<header class="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm py-3 transition-all duration-300">
-    <div class="container mx-auto px-4 sm:px-6">
-        <nav class="flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center flex-shrink-0 font-serif">
-                <a class="flex items-center text-xl sm:text-2xl font-bold text-primary-700 hover:text-primary-800 transition-colors duration-200" href="/">
-                    <svg class="h-7 w-7 sm:h-8 sm:w-8 mr-2 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm py-3 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6">
+            <nav class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center flex-shrink-0 font-serif">
+                    <a class="flex items-center text-xl sm:text-2xl font-bold text-primary-700 hover:text-primary-800 transition-colors duration-200" href="/">
+                        <svg class="h-7 w-7 sm:h-8 sm:w-8 mr-2 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span class="hidden sm:inline">Sabi<span class="text-accent-500">Exports</span></span>
+                        <span class="sm:hidden">SE</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-5 lg:space-x-7">
+                    <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">About</a>
+                    <a href="#benefits" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">Benefits</a>
+                    <a href="#testimonials" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">Success Stories</a>
+                    <a href="#bonuses" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">Bonuses</a>
+                    <a href="#pricing" class="bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white px-5 py-2 rounded-full transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95 text-sm lg:text-base">
+                        Buy Now for ₦9,999
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-700 focus:outline-none transition-colors duration-200" id="mobile-menu-button" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                    <span class="hidden sm:inline">Sabi<span class="text-accent-500">Exports</span></span>
-                    <span class="sm:hidden">SE</span>
-                </a>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-5 lg:space-x-7">
-                <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">About</a>
-                <a href="#benefits" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">Benefits</a>
-                <a href="#testimonials" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">Success Stories</a>
-                <a href="#bonuses" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium text-sm lg:text-base">Bonuses</a>
-                <a href="#pricing" class="bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white px-5 py-2 rounded-full transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-95 text-sm lg:text-base">
+                </button>
+            </nav>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white w-full py-3 px-4 shadow-lg transition-all duration-300 origin-top" id="mobile-menu">
+            <div class="flex flex-col space-y-3">
+                <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">About</a>
+                <a href="#benefits" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Benefits</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Success Stories</a>
+                <a href="#bonuses" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Bonuses</a>
+                <a href="#pricing" class="bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white px-6 py-3 rounded-full transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg mt-2">
                     Buy Now for ₦9,999
                 </a>
             </div>
-            
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-gray-700 focus:outline-none transition-colors duration-200" id="mobile-menu-button" aria-label="Toggle menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </nav>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div class="md:hidden hidden bg-white w-full py-3 px-4 shadow-lg transition-all duration-300 origin-top" id="mobile-menu">
-        <div class="flex flex-col space-y-3">
-            <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">About</a>
-            <a href="#benefits" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Benefits</a>
-            <a href="#testimonials" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Success Stories</a>
-            <a href="#bonuses" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2 px-2 rounded hover:bg-gray-50">Bonuses</a>
-            <a href="#pricing" class="bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white px-6 py-3 rounded-full transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg mt-2">
-                Buy Now for ₦9,999
-            </a>
         </div>
-    </div>
-</header>
+    </header>
 
-<script>
-    // Mobile menu toggle functionality
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-        menu.classList.toggle('block');
-        
-        // Toggle aria-expanded attribute
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        
-        // Change icon when menu is open
-        const icon = this.querySelector('svg');
-        if (!isExpanded) {
-            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-        } else {
-            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-        }
-    });
-</script>
+    <script>
+        // Mobile menu toggle functionality
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('block');
+            
+            // Toggle aria-expanded attribute
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            
+            // Change icon when menu is open
+            const icon = this.querySelector('svg');
+            if (!isExpanded) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            }
+        });
+    </script>
     
     <!-- Hero Section -->
     <section class="py-16 md:py-24 bg-gradient-to-br from-primary-200 to-secondary-200 relative overflow-hidden">
@@ -1533,12 +1533,6 @@
             offset: 100
         });
         
-        // Mobile menu
-        const menuButton = document.getElementById('mobile-menu-button');
-        const menu = document.getElementById('mobile-menu');
-        menuButton.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
         
         // Sticky nav
         window.addEventListener('scroll', () => {

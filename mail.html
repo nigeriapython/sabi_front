@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Free Export Guide</title>
+    <style>
+        /* Reset styles for email compatibility */
+        body, table, td, a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+            border-collapse: collapse;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .body {
+            width: 100%;
+            background-color: #faf7f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .content {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .header {
+            background: linear-gradient(135deg, #967f48 0%, #d9b01a 100%);
+            padding: 25px 30px;
+            text-align: center;
+        }
+        .logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .main {
+            padding: 30px;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #666666;
+        }
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #967f48 0%, #d9b01a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(150, 127, 72, 0.3);
+        }
+        .divider {
+            height: 1px;
+            background-color: #e8e0cd;
+            margin: 25px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #967f48;
+            text-decoration: none;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+            }
+            .main {
+                padding: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center class="container">
+        <table class="body" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td>
+                    <!-- Header -->
+                    <table class="content" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td class="header">
+                                <a href="#" class="logo">Sabi<span style="color: #f2c933;">Exports</span></a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Main Content -->
+                        <tr>
+                            <td class="main">
+                                <h2 style="color: #967f48; margin-top: 0;">Hello <?php echo $name; ?>,</h2>
+                                
+                                <p>Thank you for subscribing to SabiExports! We're excited to help you start your export journey from Nigeria.</p>
+                                
+                                <p>As promised, here is your free guide: <strong>"The Beginner's Guide to Nigeria Exports"</strong></p>
+                                
+                                <center>
+                                    <a href="<?php echo $downloadLink; ?>" class="button">
+                                        📥 Download Your Free Guide
+                                    </a>
+                                </center>
+                                
+                                <p>This comprehensive guide includes:</p>
+                                <ul>
+                                    <li>Step-by-step instructions for starting your export business</li>
+                                    <li>Key requirements and documentation needed</li>
+                                    <li>Top products with high international demand</li>
+                                    <li>Common mistakes to avoid as a beginner</li>
+                                    <li>Resources for finding international buyers</li>
+                                </ul>
+                                
+                                <div class="divider"></div>
+                                
+                                <h3 style="color: #967f48;">What's Next?</h3>
+                                <p>After reading the guide, join our community of successful exporters:</p>
+                                
+                                <center>
+                                    <table cellpadding="10">
+                                        <tr>
+                                            <td>
+                                                <a href="#" style="display: inline-block; background: #0088cc; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                                                    Telegram Group
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#" style="display: inline-block; background: #25D366; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                                                    WhatsApp Community
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                                
+                                <p>If you have any questions, simply reply to this email. We're here to help!</p>
+                                
+                                <p>Best regards,<br>
+                                <strong>The SabiExports Team</strong></p>
+                            </td>
+                        </tr>
+                        
+                        <!-- Footer -->
+                        <tr>
+                            <td class="footer">
+                                <p>© 2023 SabiExports. All rights reserved.</p>
+                                
+                                <p>You're receiving this email because you signed up for our free export guide.</p>
+                                
+                                <div class="social-links">
+                                    <a href="#">Website</a> • 
+                                    <a href="#">Facebook</a> • 
+                                    <a href="#">Instagram</a> • 
+                                    <a href="#">Twitter</a>
+                                </div>
+                                
+                                <p>
+                                    <a href="#" style="color: #967f48;">Unsubscribe</a> | 
+                                    <a href="#" style="color: #967f48;">Privacy Policy</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

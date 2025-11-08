@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Downloading - Sabiexports</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Facebook Pixel Base Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '767776049515297'); // Replace with your Pixel ID
+        fbq('track', 'Free Guide Success PageView');     // Tracks normal page visit
+        fbq('track', 'Completed Free Guide Lead');         // Tracks form submission conversion
+    </script>
+    <noscript>
+        <img height="1" width="1" 
+        src="https://www.facebook.com/tr?id=767776049515297&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf7f0',
+                            100: '#e8e0cd',
+                            200: '#d5c8a9',
+                            300: '#c2b086',
+                            400: '#af9962',
+                            500: '#967f48',
+                            600: '#756338',
+                            700: '#544728',
+                            800: '#332b18',
+                            900: '#120f08',
+                        },
+                        accent: {
+                            50: '#fef9e6',
+                            100: '#fbedb9',
+                            200: '#f8e18d',
+                            300: '#f5d560',
+                            400: '#f2c933',
+                            500: '#d9b01a',
+                            600: '#a88914',
+                            700: '#77620e',
+                            800: '#453b08',
+                            900: '#141402',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles */
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #967f48, #d9b01a);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .download-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+
+        .download-btn:hover:after {
+            left: 100%;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 5;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            box-shadow: 0 0 20px rgba(150, 127, 72, 0.3);
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 5;
+            stroke-miterlimit: 10;
+            stroke: #967f48;
+            fill: none;
+            animation: stroke .6s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+        }
+
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) .8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none;
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: 0 0 20px rgba(150, 127, 72, 0.5);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-800 bg-primary-50 antialiased min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center font-serif">
+                <a class="flex items-center text-xl font-bold text-primary-700" href="/free-export-guide">
+                    <svg class="h-6 w-6 mr-2 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    Sabi<span class="text-accent-500">Exports</span>
+                </a>
+            </div>
+            <a href="/free-export-guide" class="text-primary-600 hover:text-primary-700 font-medium">
+                <i class="fas fa-home mr-1"></i>Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+
+
+                <!-- Success Icon -->
+                <div class="mb-8 flex justify-center">
+                    <svg class="checkmark text-green-500 w-16 h-16" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" stroke="currentColor"
+                            stroke-width="2" />
+                        <path class="checkmark-check" fill="none" stroke="currentColor" stroke-width="4"
+                            d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-serif">
+                    Thank You for <span class="gradient-text">Downloading!</span>
+                </h1>
+
+                <p class="text-xl text-gray-600 mb-8">
+                    Your free guide to Nigeria exports is on its way to your inbox. Check your email in the next few
+                    minutes.
+                </p>
+
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-primary-100">
+                    <h2 class="text-2xl font-bold mb-4 text-primary-800">What's Next?</h2>
+                    <ol class="text-left space-y-4 text-gray-700">
+                        <li class="flex items-start">
+                            <span
+                                class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                            <span>Check your email (and spam folder) for the download link</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span
+                                class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                            <span>Save the PDF to your device for future reference</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span
+                                class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                            <span>Start reading and begin your export journey!</span>
+                        </li>
+                    </ol>
+
+                    <!-- Instant Download Option -->
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600 mb-3">Or</p>
+                        <a href="files/nigeria-export-beginners-guide-free.pdf" download onclick="fbq('track', 'Manual Free Guide Download')"
+                            class="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition">
+                            📥 Click here to download instantly
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="py-12 md:py-20 bg-gradient-to-br from-primary-600 to-primary-700 text-white">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 md:mb-6 font-serif" data-aos="fade-down">Ready to Start
+                    Your Export Journey?</h2>
+                <p class="text-lg md:text-xl mb-6 md:mb-8 opacity-90 leading-relaxed" data-aos="fade-down"
+                    data-aos-delay="100">Join 2,500+ Nigerians who've transformed their income with this guide. Your
+                    ₦500k/month export business starts today.</p>
+
+                <!-- Two-column layout for larger screens -->
+                <div class="flex flex-col lg:flex-row gap-6 md:gap-8 justify-center items-stretch">
+                    <!-- Main Offer Card -->
+                    <div class="max-w-md mx-auto bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-xl p-6 md:p-8 text-gray-800 flex-1"
+                        data-aos="zoom-in">
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">Get Everything For Just ₦5,999</h3>
+                        <ul class="space-y-2 md:space-y-3 mb-4 md:mb-6 text-left">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-base md:text-[15px]">The Complete Export Guide (250+ pages)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-base md:text-[15px]">7 Done-For-You Templates (₦50,000 value)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-base md:text-[15px]">Private Exporters Community Access</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-base md:text-[15px]">AI Export Assistant (NEW Bonus)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-base md:text-[15px]">60-Day Money-Back Guarantee</span>
+                            </li>
+                        </ul>
+
+                        <a href="#pricing"
+                            class="inline-flex items-center justify-center bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white text-lg font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-95 w-full">
+                            Get Instant Access Now
+                        </a>
+
+                        <div class="mt-4 md:mt-5 flex items-center justify-center text-xs md:text-sm text-gray-600">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            <span>Secure Checkout | Instant Delivery | 60-Day Guarantee</span>
+                        </div>
+                    </div>
+
+                    <!-- Telegram Card -->
+                    <div class="max-w-md mx-auto bg-gradient-to-br from-[#0088cc] to-primary-600 rounded-xl md:rounded-2xl shadow-lg md:shadow-xl p-6 md:p-8 text-white flex-1"
+                        data-aos="zoom-in" data-aos-delay="150">
+                        <div class="flex flex-col h-full">
+                            <div class="flex items-center justify-center mb-4">
+                                <svg class="w-10 h-10 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
+                                </svg>
+                                <h3 class="text-xl md:text-2xl font-bold">Free Telegram Community</h3>
+                            </div>
+
+                            <p class="mb-5 text-sm md:text-base opacity-90 flex-grow">
+                                Join our 5,000+ member community for daily export tips, business opportunities, and
+                                networking with successful Nigerian exporters.
+                            </p>
+
+                            <div class="space-y-3 mb-5">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-white mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                    <span>Instant access to 5,000+ exporters</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-white mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
+                                    <span>Daily business opportunities</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-white mr-2 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                    <span>Exclusive guides & resources</span>
+                                </div>
+                            </div>
+
+                            <a href="https://t.me/+ocNGNesJtz01ZWI0" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-[#0088cc] font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-95 w-full mt-auto">
+                                Join @SabiExports.ng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-900 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center mb-6 font-serif">
+                    <svg class="h-8 w-8 mr-2 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    <span class="text-2xl font-bold">Sabi<span class="text-accent-500">Exports</span></span>
+                </div>
+                <p class="text-primary-300 mb-6 max-w-2xl mx-auto">Empowering Nigerians to conquer global markets
+                    through education and practical guidance.</p>
+
+
+
+                <p class="text-primary-400 text-sm">© 2023 Sabiexports Digital Solutions Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple countdown to encourage checking email
+        document.addEventListener('DOMContentLoaded', function () {
+            let count = 60;
+            const timerElement = document.getElementById('countdown-timer');
+
+            if (timerElement) {
+                const countdown = setInterval(function () {
+                    count--;
+                    timerElement.textContent = count;
+
+                    if (count <= 0) {
+                        clearInterval(countdown);
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

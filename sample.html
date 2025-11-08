@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Downloads Notification</title>
+    <style>
+        /* Notification styling */
+        .download-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            border-left: 4px solid #967f48;
+        }
+        
+        .download-notification.active {
+            transform: translateX(0);
+        }
+        
+        .download-notification .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #e8e0cd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #967f48;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .download-notification .content {
+            flex-grow: 1;
+        }
+        
+        .download-notification .name {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        
+        .download-notification .location {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .download-notification .time {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .download-notification .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        /* Demo page styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #faf7f0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #967f48;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .code-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        pre {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #967f48;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #756338;
+        }
+        
+        .instructions {
+            background: #e8e0cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fake Recent Downloads Notification</h1>
+    
+    <div class="instructions">
+        <h2>Integration Instructions</h2>
+        <p>Copy the code below and paste it just before the closing <code>&lt;/body&gt;</code> tag on your website.</p>
+    </div>
+    
+    <div class="code-container">
+        <h3>JavaScript Code to Add to Your Site</h3>
+        <pre><code>&lt;script&gt;
+// Fake user data
+const users = [
+    { name: "Chinedu Okoro", location: "Lagos, Nigeria", initials: "CO" },
+    { name: "Amina Mohammed", location: "Kano, Nigeria", initials: "AM" },
+    { name: "Tunde Ogunleye", location: "Ibadan, Nigeria", initials: "TO" },
+    { name: "Ngozi Eze", location: "Abuja, Nigeria", initials: "NE" },
+    { name: "Emeka Nwankwo", location: "Enugu, Nigeria", initials: "EN" },
+    { name: "Funke Adebayo", location: "Port Harcourt, Nigeria", initials: "FA" },
+    { name: "Bola Adeyemi", location: "Osun, Nigeria", initials: "BA" },
+    { name: "Chioma Okonkwo", location: "Anambra, Nigeria", initials: "CO" },
+    { name: "Segun Alabi", location: "Oyo, Nigeria", initials: "SA" },
+    { name: "Zainab Ibrahim", location: "Kaduna, Nigeria", initials: "ZI" },
+    { name: "John Smith", location: "London, UK", initials: "JS" },
+    { name: "Sarah Johnson", location: "New York, USA", initials: "SJ" },
+    { name: "David Brown", location: "Toronto, Canada", initials: "DB" },
+    { name: "Maria Garcia", location: "Madrid, Spain", initials: "MG" },
+    { name: "James Wilson", location: "Sydney, Australia", initials: "JW" }
+];
+
+// Time options for the notification
+const timeOptions = [
+    "just now",
+    "1 minute ago",
+    "2 minutes ago",
+    "3 minutes ago",
+    "5 minutes ago",
+    "10 minutes ago",
+    "15 minutes ago",
+    "20 minutes ago",
+    "30 minutes ago",
+    "45 minutes ago",
+    "1 hour ago"
+];
+
+// Function to show a notification
+function showDownloadNotification() {
+    // Create notification element if it doesn't exist
+    if (!document.getElementById('download-notification')) {
+        const notification = document.createElement('div');
+        notification.id = 'download-notification';
+        notification.className = 'download-notification';
+        notification.innerHTML = `
+            <div class="avatar"></div>
+            <div class="content">
+                <div class="name"></div>
+                <div class="location"></div>
+                <div class="time"></div>
+            </div>
+            <button class="close">&times;</button>
+        `;
+        document.body.appendChild(notification);
+        
+        // Add close functionality
+        notification.querySelector('.close').addEventListener('click', function() {
+            notification.classList.remove('active');
+        });
+    }
+    
+    const notification = document.getElementById('download-notification');
+    const user = users[Math.floor(Math.random() * users.length)];
+    const time = timeOptions[Math.floor(Math.random() * timeOptions.length)];
+    
+    // Update notification content
+    notification.querySelector('.avatar').textContent = user.initials;
+    notification.querySelector('.name').textContent = user.name;
+    notification.querySelector('.location').textContent = user.location;
+    notification.querySelector('.time').textContent = time;
+    
+    // Show notification
+    notification.classList.add('active');
+    
+    // Auto-hide after 8 seconds
+    setTimeout(() => {
+        notification.classList.remove('active');
+    }, 8000);
+}
+
+// Show first notification after 3 seconds
+setTimeout(showDownloadNotification, 3000);
+
+// Set interval for subsequent notifications (every 15-30 seconds)
+setInterval(() => {
+    showDownloadNotification();
+}, 15000 + Math.random() * 15000);
+
+// Also show a notification when the page is about to be closed
+window.addEventListener('beforeunload', () => {
+    // This creates the impression of more activity as users leave
+    if (Math.random() > 0.7) { // 30% chance
+        showDownloadNotification();
+    }
+});
+&lt;/script&gt;
+
+&lt;style&gt;
+.download-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    transform: translateX(400px);
+    transition: transform 0.4s ease;
+    border-left: 4px solid #967f48;
+}
+
+.download-notification.active {
+    transform: translateX(0);
+}
+
+.download-notification .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #e8e0cd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #967f48;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.download-notification .content {
+    flex-grow: 1;
+}
+
+.download-notification .name {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.download-notification .location {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.download-notification .time {
+    font-size: 12px;
+    color: #888;
+}
+
+.download-notification .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+}
+&lt;/style&gt;
+</code></pre>
+    </div>
+    
+    <p>This script will display notifications of fake users who have "recently downloaded" your ebook. The notifications will appear in the bottom-right corner of the screen.</p>
+    
+    <p><strong>Note:</strong> This is a demo page. The script is already running on this page, so you'll see notifications appearing below.</p>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="#" class="btn">Download Ebook Now</a>
+    </div>
+
+    <!-- Actual script implementation (normally you'd copy the code above to your site) -->
+    <script>
+        // Fake user data
+        const users = [
+            { name: "Chinedu Okoro", location: "Lagos, Nigeria", initials: "CO" },
+            { name: "Amina Mohammed", location: "Kano, Nigeria", initials: "AM" },
+            { name: "Tunde Ogunleye", location: "Ibadan, Nigeria", initials: "TO" },
+            { name: "Ngozi Eze", location: "Abuja, Nigeria", initials: "NE" },
+            { name: "Emeka Nwankwo", location: "Enugu, Nigeria", initials: "EN" },
+            { name: "Funke Adebayo", location: "Port Harcourt, Nigeria", initials: "FA" },
+            { name: "Bola Adeyemi", location: "Osun, Nigeria", initials: "BA" },
+            { name: "Chioma Okonkwo", location: "Anambra, Nigeria", initials: "CO" },
+            { name: "Segun Alabi", location: "Oyo, Nigeria", initials: "SA" },
+            { name: "Zainab Ibrahim", location: "Kaduna, Nigeria", initials: "ZI" },
+            { name: "John Smith", location: "London, UK", initials: "JS" },
+            { name: "Sarah Johnson", location: "New York, USA", initials: "SJ" },
+            { name: "David Brown", location: "Toronto, Canada", initials: "DB" },
+            { name: "Maria Garcia", location: "Madrid, Spain", initials: "MG" },
+            { name: "James Wilson", location: "Sydney, Australia", initials: "JW" }
+        ];
+
+        // Time options for the notification
+        const timeOptions = [
+            "just now",
+            "1 minute ago",
+            "2 minutes ago",
+            "3 minutes ago",
+            "5 minutes ago",
+            "10 minutes ago",
+            "15 minutes ago",
+            "20 minutes ago",
+            "30 minutes ago",
+            "45 minutes ago",
+            "1 hour ago"
+        ];
+
+        // Function to show a notification
+        function showDownloadNotification() {
+            // Create notification element if it doesn't exist
+            if (!document.getElementById('download-notification')) {
+                const notification = document.createElement('div');
+                notification.id = 'download-notification';
+                notification.className = 'download-notification';
+                notification.innerHTML = `
+                    <div class="avatar"></div>
+                    <div class="content">
+                        <div class="name"></div>
+                        <div class="location"></div>
+                        <div class="time"></div>
+                    </div>
+                    <button class="close">&times;</button>
+                `;
+                document.body.appendChild(notification);
+                
+                // Add close functionality
+                notification.querySelector('.close').addEventListener('click', function() {
+                    notification.classList.remove('active');
+                });
+            }
+            
+            const notification = document.getElementById('download-notification');
+            const user = users[Math.floor(Math.random() * users.length)];
+            const time = timeOptions[Math.floor(Math.random() * timeOptions.length)];
+            
+            // Update notification content
+            notification.querySelector('.avatar').textContent = user.initials;
+            notification.querySelector('.name').textContent = user.name;
+            notification.querySelector('.location').textContent = user.location;
+            notification.querySelector('.time').textContent = time;
+            
+            // Show notification
+            notification.classList.add('active');
+            
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 8000);
+        }
+
+        // Show first notification after 3 seconds
+        setTimeout(showDownloadNotification, 3000);
+
+        // Set interval for subsequent notifications (every 15-30 seconds)
+        setInterval(() => {
+            showDownloadNotification();
+        }, 15000 + Math.random() * 15000);
+
+        // Also show a notification when the page is about to be closed
+        window.addEventListener('beforeunload', () => {
+            // This creates the impression of more activity as users leave
+            if (Math.random() > 0.7) { // 30% chance
+                showDownloadNotification();
+            }
+        });
+    </script>
+</body>
+</html>
